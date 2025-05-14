@@ -17,7 +17,6 @@ public class Logic {
         System.out.println("3. 출금");
         System.out.println("4. 프로그램 종료");
         System.out.println("=>");
-
     }
 
     // 잔액 조회 메서드
@@ -37,6 +36,7 @@ public class Logic {
     public void withdraw() {
         System.out.println("출금할 금액을 작성해주세요(숫자만 입력 가능)");
         int outCost = Integer.parseInt(sc.nextLine());
+        // 예외처리 넣어 리팩토링 진행
         account.withdraw(outCost);
         System.out.println("현재 잔액은" + account.getSum() + "원 입니다.");
     }

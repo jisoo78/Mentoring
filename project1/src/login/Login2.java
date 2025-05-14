@@ -13,6 +13,12 @@ public class Login2 {
         String saveId = "";
         String savePwd = "";
 
+        // 클래스 별로 나누어 기능 구분
+        // 아이디 중복 확인
+        // 배열(가변 배열 -> List) 내 저장?
+        // 로그인을 성공했다면 다른 선택지를 보여줄 수 있게
+        // 비밀번호 유호성 확인(특수문자, 영문자, 숫자, 8~16자) 매우 어려움 (선택)
+
         while (true) {
             System.out.println("================");
             System.out.println("1. 회원가입");
@@ -31,7 +37,7 @@ public class Login2 {
                     System.out.println("비밀번호를 입력하시오");
                     pwd = sc.nextLine();
                     savePwd = pwd;
-                    continue;
+                    break;
                 case 2:
                     System.out.println("로그인을 선택했습니다");
                     System.out.println("아이디를 입력하시오");
@@ -39,17 +45,17 @@ public class Login2 {
                     if (!saveId.equals(id)) {
 //                        saveId != id 이렇게 입력한다면 문자열 내용이 아닌 주소값을 비교하기 때문에 문제가 생깁니다
                         System.out.println("잘못된 아이디 입니다 다시 입력해주세요");
-                        continue;
+                        break;
                     } else {
                         System.out.println("비밀번호를 입력하시오");
                         pwd = sc.nextLine();
                         if (!savePwd.equals(pwd)) {
                             System.out.println("잘못된 비밀번호입니다 다시 입력해주세요");
-                            continue;
+                            break;
                         }
                         System.out.println("로그인에 성공했습니다!");
                     }
-                    continue;
+                    break;
                 case 3:
                     System.out.println("종료 버튼을 눌렀습니다 프로그램을 종료합니다");
                     return;

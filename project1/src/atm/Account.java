@@ -24,11 +24,12 @@ public class Account {
     }
 
     public void withdraw(int outCost) {
-        if (sum > outCost) {
+        if (sum >= outCost) {
             sum -= outCost;
             System.out.println(outCost + "원 출금되었습니다.");
+        } else {
+            System.out.println("잔액이 부족하여 출금이 불가능 합니다.");
         }
-        System.out.println("잔액이 부족하여 출금이 불가능 합니다.");
 
     }
 }
