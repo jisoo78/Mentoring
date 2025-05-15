@@ -44,6 +44,8 @@ public class LoginMain {
                         // 다른 패키지의 메인 메서드 실행
                         Main.main(null);
                     }
+                    break;
+
                 case 3:
                     System.out.println("종료 버튼을 눌렀습니다 프로그램을 종료합니다");
                     scanner.close();
@@ -57,7 +59,7 @@ public class LoginMain {
 
         }
 
-        // 비밀번호 유호성 확인(특수문자, 영문자, 숫자, 8~16자) 매우 어려움 (선택)
+        // 비밀번호 유호성 확인(특수문자, 영문자, 숫자, 8~16자) 매우 어려움 과제 ㄱㄱ
     }
 }
 
