@@ -4,6 +4,7 @@ import java.util.Scanner;
 import atm.Main;
 
 public class LoginMain {
+    // 림 작성
     public static void main(String[] args) {
         UserManage userManage = new UserManage();
         LoginInfo loginInfo = new LoginInfo();
