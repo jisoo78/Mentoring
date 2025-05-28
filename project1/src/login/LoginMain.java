@@ -8,10 +8,6 @@ public class LoginMain {
         UserManage userManage = new UserManage();
         LoginInfo loginInfo = new LoginInfo();
         Scanner scanner = new Scanner(System.in);
-        // 클래스 별로 나누어 기능 구분 o
-        // 아이디 중복 확인 o
-        // 배열(가변 배열 -> List) 내 저장? o
-        // 로그인을 성공했다면 다른 선택지를 보여줄 수 있게 0
         while (true) {
             loginInfo.menu();
             int num = scanner.nextInt();
@@ -22,22 +18,36 @@ public class LoginMain {
                     System.out.println("아이디를 입력하시오");
                     String id = scanner.nextLine();
 
-                    System.out.println("비밀번호를 입력하시오");
-                    String pwd = scanner.nextLine();
+                    String pwd;
+                    // do while 을 통해 무조건 검사를 하고 지나간다
+                    do {
+                        System.out.println("비밀번호를 입력하시오 (영문·숫자·특수문자 조합, 8~16자)");
+                        pwd = scanner.nextLine();
+                        if (!UserManage.isValid(pwd)) {
+                            System.out.println("유효하지 않은 비밀번호입니다. 다시 입력해 주세요.");
+                        }
+                    } while (!UserManage.isValid(pwd));
 
-                    userManage.signUp(id, pwd);
+                    System.out.println("유저의 이름을 입력하시오: ");
+                    String name = scanner.nextLine();
+
+                    System.out.println("나이를 입력하시오: ");
+                    int age = Integer.parseInt(scanner.nextLine());
+
+
+                    userManage.signUp(id, pwd, name, age);
                     break;
 
                 case 2:
                     System.out.println("로그인을 선택했습니다");
                     System.out.println("아이디를 입력하시오");
                     id = scanner.nextLine();
+                    // 로그인 할 때 아이디가 없다면 -> 다른 아이디 로그인이나 회원가입으로 넘어가기
+                    id = userManage.replay(id, scanner);
+
                     System.out.println("비밀번호를 입력하시오");
                     pwd = scanner.nextLine();
                     userManage.login(id, pwd);
-                    // 아이디 패스워드 로그인 메서드에 넘겨주고
-                    // 로그인 메서드에서 아이디 비밀번호 받고 다시 유저의 로그인을 확인하는 메서드로 이동 후 리턴값 확인
-//                    loginInfo.success(id, pwd);
                     boolean success = userManage.login(id, pwd);
                     if (success) {
                         System.out.println("atm 시뮬레이션으로 이동합니다");
@@ -51,6 +61,45 @@ public class LoginMain {
                     scanner.close();
                     return;
 
+                case 4:
+                    System.out.println("회원 정보 수정 메뉴입니다");
+                    System.out.print("수정할 아이디를 입력하시오: ");
+                    String idModify = scanner.nextLine();
+
+                    System.out.print("이름을 다시 입력하시오: ");
+                    String newName = scanner.nextLine();
+
+                    System.out.print("나이를 다시 입력하시오: ");
+                    int newAge;
+                    try {
+                        newAge = Integer.parseInt(scanner.nextLine());
+                    } catch (NumberFormatException e) {
+                        System.out.println("잘못된 나이 입력입니다. 숫자를 입력해주세요.");
+                        break;
+                    }
+
+                    userManage.updateUserInfo(idModify, newName, newAge);
+                    break;
+
+                case 5:
+                    System.out.println("회원 정보 확인하기\n 아이디를 입력해주세요");
+                    String checkId = scanner.nextLine();
+
+
+                case 6:
+                    System.out.println("회원탈퇴를 선택했습니다\n아이디를 입력해주세요");
+                    String removeId = scanner.nextLine();
+                    System.out.println("비밀번호를 입력해주세요");
+                    String removePwd = scanner.nextLine();
+
+                    boolean delete = userManage.isWithdrawal(removeId, removePwd);
+                    if (delete) {
+                        System.out.println("정상");
+                    } else {
+                        System.out.println("실패");
+                    }
+                    break;
+
                 default:
                     // 모두 해당이 되지 않는 경우
                     System.out.println("1 ~ 3 사이의 값을 입력해주세요");
@@ -58,8 +107,6 @@ public class LoginMain {
             }
 
         }
-
-        // 비밀번호 유호성 확인(특수문자, 영문자, 숫자, 8~16자) 매우 어려움 과제 ㄱㄱ
     }
 }
 

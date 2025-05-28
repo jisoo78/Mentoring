@@ -14,15 +14,11 @@ public class LoginInfo {
         System.out.println("1. 회원가입");
         System.out.println("2. 로그인");
         System.out.println("3. 종료");
+        System.out.println("4. 정보 수정");
+        System.out.println("5. 회원 탈퇴");
         System.out.println("=>");
         System.out.println("=================");
     }
-
-
-
-    // 종료
-
-
 
     // 로그인 이후 페이지
     public boolean success(String id, String pwd) {
